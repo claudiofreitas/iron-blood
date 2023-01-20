@@ -26,13 +26,13 @@ export async function getAllTrainsById(ids: string[]) {
     KeyConditionExpression: "pk = :pk",
     ExpressionAttributeValues: {
       ":pk": "train",
-    }
-  })
-  return result.Items.map(item => ({
+    },
+  });
+  return result.Items.map((item) => ({
     trainId: item.pk,
     name: item.name,
   }));
-
+}
 
 export async function getAllTrains(): Promise<Train[]> {
   const db = await arc.tables();
