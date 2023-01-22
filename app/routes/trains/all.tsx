@@ -21,15 +21,12 @@ export const action: ActionFunction = async ({ request }) => {
 
   const trainIdInterest = formData.get("trainIdInterest");
   const trainIdRide = formData.get("trainIdRide");
-  console.log(trainIdInterest, trainIdRide);
 
-  console.log("first");
   if (trainIdInterest) {
     interestTrain({ userId, trainId: trainIdInterest as string });
   }
 
   if (trainIdRide) {
-    console.log("here");
     rideTrain({ userId, trainId: trainIdRide as string });
   }
 
