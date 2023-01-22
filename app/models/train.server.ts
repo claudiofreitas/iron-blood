@@ -75,13 +75,50 @@ export async function interestTrain({
   }
 }
 
+export async function rideTrain({
+  userId,
+  trainId,
+}: {
+  userId: string;
+  trainId: string;
+}): Promise<void> {
+  const db = await arc.tables();
+  const train = await db.train.get({ trainId });
+  const ridden = await db.ridden.get({ userId, trainId });
+  if (train) {
+    if (ridden) {
+      await db.ridden
+        .delete({ userId, trainId })
+        .catch((e) => console.error("error", e));
+    } else {
+      await db.ridden.put({ userId: userId, trainId: train.trainId });
+    }
+  } else {
+    console.error("Could not find user or train");
+  }
+}
+
 export async function getInterestedTrainByUserId({
   userId,
 }: {
   userId: string;
-}): Promise<Train[]> {
+}): Promise<{ userId: string; trainId: string }[]> {
   const db = await arc.tables();
   const trains = await db.interested.query({
+    KeyConditionExpression: "userId = :userId",
+    ExpressionAttributeValues: { ":userId": userId },
+  });
+
+  return trains.Items.map((t: any) => t);
+}
+
+export async function getRiddenTrainByUserId({
+  userId,
+}: {
+  userId: string;
+}): Promise<{ userId: string; trainId: string }[]> {
+  const db = await arc.tables();
+  const trains = await db.ridden.query({
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: { ":userId": userId },
   });

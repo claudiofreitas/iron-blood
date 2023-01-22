@@ -11,6 +11,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import {
   getInterestedTrainByUserId,
   interestTrain,
+  rideTrain,
 } from "~/models/train.server";
 import { getAllTrains } from "~/models/train.server";
 
@@ -19,9 +20,17 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
 
   const trainIdInterest = formData.get("trainIdInterest");
+  const trainIdRide = formData.get("trainIdRide");
+  console.log(trainIdInterest, trainIdRide);
 
+  console.log("first");
   if (trainIdInterest) {
     interestTrain({ userId, trainId: trainIdInterest as string });
+  }
+
+  if (trainIdRide) {
+    console.log("here");
+    rideTrain({ userId, trainId: trainIdRide as string });
   }
 
   return null;
@@ -66,7 +75,7 @@ export default function AllTrains() {
               <label>{line.name.en}</label>
             </Link>
             <div className="flex gap-1">
-              <button name="trainIdRode" value={line.trainId}>
+              <button name="trainIdRide" value={line.trainId}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill={rodeLines.includes(line.trainId) ? "green" : "none"}
@@ -74,17 +83,6 @@ export default function AllTrains() {
                   strokeWidth={1.5}
                   stroke="currentColor"
                   className="h-6 w-6 cursor-pointer"
-                  onClick={() => {
-                    if (!rodeLines.includes(line.trainId)) {
-                      setRodeLines([...rodeLines, line.trainId]);
-                    } else {
-                      setRodeLines([
-                        ...rodeLines.filter(
-                          (rodeLineId) => rodeLineId != line.trainId
-                        ),
-                      ]);
-                    }
-                  }}
                 >
                   <path
                     strokeLinecap="round"
@@ -110,18 +108,6 @@ export default function AllTrains() {
                   className={`h-6 w-6 cursor-pointer ${
                     interestedLines.includes(line.trainId) && "animate-spin"
                   }`}
-                  onClick={() => {
-                    // Submit with the line id
-                    if (!interestedLines.includes(line.trainId)) {
-                      setInterestedLines([...interestedLines, line.trainId]);
-                    } else {
-                      setInterestedLines([
-                        ...interestedLines.filter(
-                          (interestedLineId) => interestedLineId != line.trainId
-                        ),
-                      ]);
-                    }
-                  }}
                 >
                   <path
                     strokeLinecap="round"

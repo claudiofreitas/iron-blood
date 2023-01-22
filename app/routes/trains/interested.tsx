@@ -8,11 +8,10 @@ import {
 import { requireUserId } from "~/session.server";
 
 type LoaderData = {
-  trains: NonNullable<Awaited<ReturnType<typeof getInterestedTrainByUserId>>>;
+  trains: NonNullable<Awaited<ReturnType<typeof getAllTrainsById>>>;
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  // Get interested trains
   const userId = await requireUserId(request);
   const interestedTrainByUserId = await getInterestedTrainByUserId({ userId });
   const interestedTrains = await getAllTrainsById(

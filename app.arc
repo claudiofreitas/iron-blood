@@ -29,6 +29,6 @@ interested
   userId *String
   trainId **String
 
-# ridden
-#   pk *String # userId
-#   sk **String # trainId
+ridden
+  userId *String # userId
+  trainId **String # trainId

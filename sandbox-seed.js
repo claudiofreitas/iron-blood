@@ -18,4 +18,5 @@ module.exports = {
   note: [],
   train: [...uniqueTrains],
   interested: [],
+  ridden: [],
 };
