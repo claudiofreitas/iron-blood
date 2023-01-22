@@ -20,16 +20,22 @@ export async function getTrain({ id }: { id: string }): Promise<Train | null> {
 }
 
 export async function getAllTrainsById(ids: string[]) {
+  if (ids.length === 0) return [];
+
   const db = await arc.tables();
-  // const result = await db.train.query({trainId: ids});
-  const result = await db.train.query({
-    KeyConditionExpression: "pk = :pk",
-    ExpressionAttributeValues: {
-      ":pk": "train",
-    },
-  });
-  return result.Items.map((item) => ({
-    trainId: item.pk,
+  const keys = ids.map((id) => ({ trainId: id }));
+  const result = await db._doc
+    .batchGet({
+      RequestItems: {
+        "iron-blood-b556-staging-train": {
+          Keys: keys,
+        },
+      },
+    })
+    .promise();
+
+  return result.Responses?.["iron-blood-b556-staging-train"]?.map((item) => ({
+    trainId: item.trainId,
     name: item.name,
   }));
 }
@@ -37,9 +43,7 @@ export async function getAllTrainsById(ids: string[]) {
 export async function getAllTrains(): Promise<Train[]> {
   const db = await arc.tables();
   const trains = await db.train.scan({});
-  // TODO: Type
   return trains.Items.map((t: any) => {
-    console.log(t);
     return {
       trainId: t.trainId,
       name: t.name,
@@ -71,7 +75,7 @@ export async function interestTrain({
   }
 }
 
-export async function getInterestedTrain({
+export async function getInterestedTrainByUserId({
   userId,
 }: {
   userId: string;

@@ -6,9 +6,12 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { getUserId, requireUserId } from "~/session.server";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { getInterestedTrain, interestTrain } from "~/models/train.server";
+import {
+  getInterestedTrainByUserId,
+  interestTrain,
+} from "~/models/train.server";
 import { getAllTrains } from "~/models/train.server";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -28,7 +31,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const trains = await getAllTrains();
   const userId = await getUserId(request);
   if (userId) {
-    const interestedTrains = await getInterestedTrain({ userId });
+    const interestedTrains = await getInterestedTrainByUserId({ userId });
     return {
       lines: trains,
       interestedTrains,
@@ -36,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   } else {
     return {
       lines: trains,
-      interestTrains: [],
+      interestedTrains: [],
     };
   }
 };
@@ -63,7 +66,6 @@ export default function AllTrains() {
               <label>{line.name.en}</label>
             </Link>
             <div className="flex gap-1">
-              {/* <input type="checkbox" name="trainId" value={line.id} /> */}
               <button name="trainIdRode" value={line.trainId}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

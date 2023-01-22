@@ -1,7 +1,5 @@
 const { lines } = require("japan-train-data");
 
-console.log("sandbox-seed.js");
-
 const trains = [
   ...lines.map((line) => ({
     trainId: `${line.id}`,

@@ -1,6 +1,9 @@
 @app
 iron-blood-b556
 
+@aws
+region ap-northeast-1
+
 @http
 /*
   method any
