@@ -2,12 +2,22 @@ import arc from "@architect/functions";
 import { i18nText } from "./types/common";
 import type { User } from "./user.server";
 
-export type Train = {
+export type TrainLine = {
   trainId: string;
+  name: i18nText;
+  prefectureId: string;
+};
+
+export type Station = {
+  stationId: string;
   name: i18nText;
 };
 
-export async function getTrain({ id }: { id: string }): Promise<Train | null> {
+export async function getTrain({
+  id,
+}: {
+  id: string;
+}): Promise<Omit<TrainLine, "prefectureId"> | null> {
   const db = await arc.tables();
   const result = await db.train.get({ trainId: id });
   if (result) {
@@ -40,13 +50,14 @@ export async function getAllTrainsById(ids: string[]) {
   }));
 }
 
-export async function getAllTrains(): Promise<Train[]> {
+export async function getAllTrains(): Promise<TrainLine[]> {
   const db = await arc.tables();
   const trains = await db.train.scan({});
   return trains.Items.map((t: any) => {
     return {
       trainId: t.trainId,
       name: t.name,
+      prefectureId: t.prefectureId,
     };
   });
 }

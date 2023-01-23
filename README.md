@@ -4,6 +4,16 @@ A train-riding app for train fans (in Japan).
 
 Built with the Remix Grunge Stack.
 
+## Philosophy
+
+As a noob- 鉄道ファン, I hope that everyone can share the same excitement of the world of trains here in Japan. So in that regard,
+I want this application to be accesible to everyone, even those who do disable their JavaScript :). This also means adding support
+for any type of disability, and great screen-reading support, etc.
+
+---
+
+Below is the boilerplate README from the Grunge Stack. To be removed once deployed.
+
 # Remix Grunge Stack
 
 ![The Remix Grunge Stack](https://repository-images.githubusercontent.com/463325363/edae4f5b-1a13-47ea-b90c-c05badc2a700)

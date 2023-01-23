@@ -32,3 +32,6 @@ interested
 ridden
   userId *String # userId
   trainId **String # trainId
+
+prefectures
+  prefectureId *String
