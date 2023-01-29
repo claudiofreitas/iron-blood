@@ -69,3 +69,17 @@ export function useUser(): User {
 export function validateEmail(email: unknown): email is string {
   return typeof email === "string" && email.length > 3 && email.includes("@");
 }
+
+export function getTrainLineBgColor(id: string): string {
+  const colors = {
+    'yamanote-green': 'bg-[#009944]',
+  }
+  return colors[id] || 'bg-[#009f44]'
+}
+
+export function getTrainLineBorderColor(id: string): string {
+  const colors = {
+    'yamanote-green': 'border-[#009944]',
+  }
+  return colors[id] || 'border-[#009f44]'
+}

@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const { addDynamicIconSelectors } = require("@iconify/tailwind");
+const trainColors = require("./train-colors");
+
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
     extend: {
+      colors: trainColors.colors,
       keyframes: {
         spin: {
           "0%": {
@@ -18,5 +22,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    addDynamicIconSelectors()
+  ],
 };
