@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getTrainLineBgColor, getTrainLineBorderColor } from "~/utils";
 
 interface Props {
+  trainId: string
   label: i18nText;
   lineColor: string;
   numberOfStations: number;
@@ -11,6 +12,7 @@ interface Props {
   isInterested: boolean;
 }
 export default function TrainLineCard({
+  trainId,
   label,
   lineColor,
   numberOfStations,
@@ -73,10 +75,12 @@ export default function TrainLineCard({
               </small>
             </div>
             <div className="flex grow items-end justify-end gap-2 pb-4">
+              <button name="trainIdRide" value={trainId}>
               <span
                 className="icon-[ic--outline-train] h-6 w-6 text-slate-600 transition-transform active:scale-75"
                 onClick={() => setIsRidden(true)}
-              ></span>
+              ></span></button>
+              <button name="trainIdInterest" value={trainId}>
               {isInterested ? (
                 <span
                   className="icon-[ic--round-bookmark-added] h-6 w-6 text-slate-600 transition-transform active:scale-75"
@@ -87,7 +91,7 @@ export default function TrainLineCard({
                   className="icon-[ic--round-bookmark-add] h-6 w-6 text-slate-600 transition-transform active:scale-75"
                   onClick={() => setIsInterest(true)}
                 ></span>
-              )}
+              )}</button>
             </div>
           </div>
         </div>

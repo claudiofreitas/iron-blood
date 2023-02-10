@@ -6,7 +6,7 @@ export default function Test() {
       <TrainLineCard
         isRidden={false}
         isInterested={false}
-        lineColor={"yamanote-reen"}
+        lineColor={"yamanote-green"}
         label={{ ja: "山手線", en: "Yamanote Line" }}
         numberOfStations={12}
       />
