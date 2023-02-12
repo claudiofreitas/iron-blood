@@ -1,5 +1,4 @@
 const { lines, prefectures } = require("japan-train-data");
-console.log(lines[0]);
 
 const trains = [
   ...lines.map((line) => ({
