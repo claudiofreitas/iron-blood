@@ -35,70 +35,74 @@ export default function TrainLineCard({
           : "bg-white"
       )}
     >
-      <Link to={`/trains/${trainId}`}>
-        <div data-hint="top-info" className="flex gap-2">
-          <div
-            data-hint="line-color"
-            className={classNames("h-20 w-6", getTrainLineBgColor(lineColor))}
-          ></div>
-          <div data-hint="line-label" className="flex flex-col">
-            <label data-hint="jp" className="text-2xl">
+      <div data-hint="top-info" className="flex gap-2">
+        <div
+          data-hint="line-color"
+          className={classNames("h-20 w-6", getTrainLineBgColor(lineColor))}
+        ></div>
+
+        <Link to={`/trains/${trainId}`}>
+          <div data-hint="line-label" className="flex max-w-1/2 flex-col">
+            <label
+              data-hint="jp"
+              className="overflow-scroll text-ellipsis whitespace-nowrap text-2xl"
+            >
               {label.ja}
             </label>
             <small data-hint="en" className="text-slate-500">
               {label.en}
             </small>
           </div>
-          <div data-hint="line-stations" className="flex grow flex-col">
-            <div
-              data-hint="station-main-line"
-              className={classNames(
-                "relative mb-1 flex h-1 w-full items-center justify-between rounded",
-                getTrainLineBgColor(lineColor)
-              )}
-            >
-              {Array.from({ length: Math.min(15, numberOfStations) }).map(
-                (_, i) => (
-                  <div
-                    key={i}
-                    data-hint="station-circle "
-                    className={classNames(
-                      "h-2.5 w-2.5 rounded border-2 bg-white",
-                      getTrainLineBorderColor(lineColor)
-                    )}
-                  ></div>
-                )
-              )}
-            </div>
-            <div className="flex justify-end">
-              <small className="text-slate-400">
-                {numberOfStations} stations
-              </small>
-            </div>
-            <div className="flex grow items-end justify-end gap-2">
-              <button name="trainIdRide" value={trainId}>
+        </Link>
+        <div data-hint="line-stations" className="flex  grow flex-col">
+          <div
+            data-hint="station-main-line"
+            className={classNames(
+              "relative mb-1 flex h-1 w-full min-w-1/2 items-center justify-between rounded",
+              getTrainLineBgColor(lineColor)
+            )}
+          >
+            {Array.from({ length: Math.min(12, numberOfStations) }).map(
+              (_, i) => (
+                <div
+                  key={i}
+                  data-hint="station-circle "
+                  className={classNames(
+                    "h-2.5 w-2.5 rounded border-2 bg-white",
+                    getTrainLineBorderColor(lineColor)
+                  )}
+                ></div>
+              )
+            )}
+          </div>
+          <div className="flex justify-end">
+            <small className="text-slate-400">
+              {numberOfStations} stations
+            </small>
+          </div>
+          <div className="flex grow items-end justify-end gap-2">
+            <button name="trainIdRide" value={trainId}>
+              <span
+                className="icon-[ic--outline-train] h-6 w-6 text-slate-600 transition-transform active:scale-75"
+                onClick={() => setIsRidden(true)}
+              ></span>
+            </button>
+            <button name="trainIdInterest" value={trainId}>
+              {isInterested ? (
                 <span
-                  className="icon-[ic--outline-train] h-6 w-6 text-slate-600 transition-transform active:scale-75"
-                  onClick={() => setIsRidden(true)}
+                  className="icon-[ic--round-bookmark-added] h-6 w-6 text-slate-600 transition-transform active:scale-75"
+                  onClick={() => setIsInterest(true)}
                 ></span>
-              </button>
-              <button name="trainIdInterest" value={trainId}>
-                {isInterested ? (
-                  <span
-                    className="icon-[ic--round-bookmark-added] h-6 w-6 text-slate-600 transition-transform active:scale-75"
-                    onClick={() => setIsInterest(true)}
-                  ></span>
-                ) : (
-                  <span
-                    className="icon-[ic--round-bookmark-add] h-6 w-6 text-slate-600 transition-transform active:scale-75"
-                    onClick={() => setIsInterest(true)}
-                  ></span>
-                )}
-              </button>
-            </div>
+              ) : (
+                <span
+                  className="icon-[ic--round-bookmark-add] h-6 w-6 text-slate-600 transition-transform active:scale-75"
+                  onClick={() => setIsInterest(true)}
+                ></span>
+              )}
+            </button>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

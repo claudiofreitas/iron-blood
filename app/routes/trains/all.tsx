@@ -74,7 +74,7 @@ export default function AllTrains() {
               trainId={line.trainId}
               label={line.name}
               lineColor={""}
-              numberOfStations={10}
+              numberOfStations={line.stations.length}
               isRidden={false}
               isInterested={
                 !!data.interestedTrains.find(

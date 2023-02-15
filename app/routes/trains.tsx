@@ -4,7 +4,7 @@ import { Link } from "@remix-run/react";
 export default function TrainsPage() {
   return (
     <>
-      <nav className="fixed bottom-0 flex w-full justify-between rounded-t border border-gray-400 bg-white p-3">
+      <nav className="fixed bottom-0 z-10 flex w-full justify-between rounded-t border border-gray-400 bg-white p-3">
         <div className="absolute top-1 left-1/2 h-1 w-1/3 -translate-x-1/2 rounded bg-gray-500 "></div>
         <div className="flex gap-6">
           <Link

@@ -6,6 +6,7 @@ export type TrainLine = {
   trainId: string;
   name: i18nText;
   prefectureId: string;
+  stations: Station[];
 };
 
 export type Station = {
@@ -19,14 +20,7 @@ export async function getTrain({
   id: string;
 }): Promise<Omit<TrainLine, "prefectureId"> | null> {
   const db = await arc.tables();
-  const result = await db.train.get({ trainId: id });
-  if (result) {
-    return {
-      trainId: result.pk,
-      name: result.name,
-    };
-  }
-  return null;
+  return await db.train.get({ trainId: id });
 }
 
 export async function getAllTrainsById(ids: string[]) {
@@ -43,7 +37,6 @@ export async function getAllTrainsById(ids: string[]) {
       },
     })
     .promise();
-
   return result.Responses?.["iron-blood-b556-staging-train"]?.map((item) => ({
     trainId: item.trainId,
     name: item.name,
@@ -53,13 +46,7 @@ export async function getAllTrainsById(ids: string[]) {
 export async function getAllTrains(): Promise<TrainLine[]> {
   const db = await arc.tables();
   const trains = await db.train.scan({});
-  return trains.Items.map((t: any) => {
-    return {
-      trainId: t.trainId,
-      name: t.name,
-      prefectureId: t.prefectureId,
-    };
-  });
+  return trains.Items;
 }
 
 export async function interestTrain({
@@ -120,7 +107,7 @@ export async function getInterestedTrainByUserId({
     ExpressionAttributeValues: { ":userId": userId },
   });
 
-  return trains.Items.map((t: any) => t);
+  return trains.Items;
 }
 
 export async function getRiddenTrainByUserId({
@@ -134,5 +121,5 @@ export async function getRiddenTrainByUserId({
     ExpressionAttributeValues: { ":userId": userId },
   });
 
-  return trains.Items.map((t: any) => t);
+  return trains.Items;
 }

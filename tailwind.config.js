@@ -6,6 +6,12 @@ module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
     extend: {
+      maxWidth: {
+        "1/2": "50%",
+      },
+      minWidth: {
+        "1/2": "50%",
+      },
       colors: trainColors.colors,
       keyframes: {
         spin: {
