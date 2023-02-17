@@ -10,6 +10,16 @@ As a noob- 鉄道ファン, I hope that everyone can share the same excitement o
 I want this application to be accesible to everyone, even those who do disable their JavaScript :). This also means adding support
 for any type of disability, and great screen-reading support, etc.
 
+## Development
+
+The project was generated using the Remix Grunge Stack as mentioned in the boilerplate below.
+
+After cloning the project, duplicate the file `.env.example` naming the duplication as `.env`.
+
+For now the value of the variables will not matter, but they need to exist.
+
+Then run `yarn install` followed by `yarn dev`. After it prints "💿 Built in ##ms", scroll to verify which port it started the server and verify in the browser that the same address can be accessed without errors.
+
 ---
 
 Below is the boilerplate README from the Grunge Stack. To be removed once deployed.
