@@ -14,11 +14,11 @@ for any type of disability, and great screen-reading support, etc.
 
 The project was generated using the Remix Grunge Stack as mentioned in the boilerplate below.
 
-After cloning the project, duplicate the file `.env.example` naming the duplication as `.env`.
+After cloning the project, duplicate the file `.env.example`, naming the duplication as `.env`.
 
 For now the value of the variables will not matter, but they need to exist.
 
-Then run `yarn install` followed by `yarn dev`. After it prints "💿 Built in ##ms", scroll to verify which port it started the server and verify in the browser that the same address can be accessed without errors.
+Then run `yarn install` followed by `yarn dev`. After it prints "💿 Built in ##ms", scroll up to verify which port it started the server and verify in the browser that the same address can be accessed without errors.
 
 ---
 
